@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack",
-    "dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --open",
+    "test-connect": "babel-node src/server/connect-db",
+    "initialize": "babel-node src/server/initialize-db",
+    "server": "babel-node src/server/server",
+    "start-dev": "concurrently \"npm run server\" \"npm run dev\""
   },
   "repository": {
     "type": "git",
@@ -26,15 +30,21 @@
     "@babel/preset-react": "^7.12.10",
     "@babel/register": "^7.12.10",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
     "webpack": "^5.16.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "history": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",

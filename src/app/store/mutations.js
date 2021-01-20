@@ -23,13 +23,13 @@ export const setTaskCompletion = (id, isComplete) => ({
 })
 
 export const setTaskName = (id, name) => ({
-    type: SET_TASK_COMPLETE,
+    type: SET_TASK_NAME,
     taskID: id,
     name
 })
 
 export const setTaskGroup = (id, groupID) => ({
-    type: SET_TASK_COMPLETE,
+    type: SET_TASK_GROUP,
     taskID: id,
     groupID
 })
