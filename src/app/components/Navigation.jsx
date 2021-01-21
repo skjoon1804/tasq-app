@@ -4,8 +4,8 @@ import React from 'react';
 
 const Navigation = () => (
     <div>
-        <Link to="/dashboard">
-            <h1>My Application</h1>
+        <Link to="/dashboard" style={{textDecoration: 'none'}}>
+            <h1>Task Manager</h1>
         </Link>
     </div>
 );
