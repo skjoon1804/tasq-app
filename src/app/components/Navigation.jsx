@@ -10,4 +10,8 @@ const Navigation = () => (
     </div>
 );
 
-export const ConnectedNavigation = connect(state => state)(Navigation);
+const mapStateToProps = (state) => ({
+    state
+})
+
+export const ConnectedNavigation = connect(mapStateToProps)(Navigation);

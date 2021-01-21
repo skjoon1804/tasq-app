@@ -4,7 +4,7 @@ import { requestTaskCreation } from '../store/mutations'
 import {withRouter, Link} from 'react-router-dom';
 
 export const TaskList = ({tasks, name, id, createNewTask}) => (
-    <div>
+    <div className="card p-2 m-2">
         <h3>{name}</h3>
         {tasks.map(task => (
             <Link key={task.id} to={`/task/${task.id}`}>  
@@ -13,7 +13,7 @@ export const TaskList = ({tasks, name, id, createNewTask}) => (
                 </div>
             </Link>
         ))}
-        <button onClick={() => createNewTask(id)}>Add New</button>
+        <button onClick={() => createNewTask(id)} className="btn btn-primary btn-block mt-2">Add New</button>
     </div>
 )
 
