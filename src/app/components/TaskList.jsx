@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { requestTaskCreation } from '../store/mutations'
-import {Link} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 
 export const TaskList = ({tasks, name, id, createNewTask}) => (
     <div>
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     }
 });
 
-export const ConnectedTaskList = connect(mapStateToProps, mapDispatchToProps)(TaskList);
+export const ConnectedTaskList = withRouter(connect(mapStateToProps, mapDispatchToProps)(TaskList));

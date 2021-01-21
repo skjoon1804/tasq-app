@@ -9,11 +9,23 @@ import * as mutations from './mutations';
 
 export const store = createStore(
     combineReducers({
-        session(session = defaultState.session) {
-            return session;
+        session(userSession = defaultState.session || {}, action) {
+            let {type, authenticated, session} = action;
+            switch (type) {
+                case mutations.SET_STATE:
+                    return {...userSession, id: action.state.session.id};
+                case mutations.REQUEST_AUTHENTICATE_USER:
+                    return {...userSession, authenticated: mutations.AUTHENTICATING};
+                case mutations.PROCESSING_AUTHENTICATE_USER:
+                    return {...userSession, authenticated};
+                default:
+                    return userSession;
+            }
         },
-        tasks(tasks = defaultState.tasks, action) {
+        tasks(tasks = [], action) {
             switch(action.type) {
+                case mutations.SET_STATE:
+                    return action.state.tasks;
                 case mutations.CREATE_TASK:
                     return [...tasks, {
                         id: action.taskID,
@@ -37,13 +49,17 @@ export const store = createStore(
             }
             return tasks;
         },
-        comments(comments = defaultState.comments) {
+        comments(comments = []) {
             return comments;
         },
-        groups(groups = defaultState.groups) {
+        groups(groups = [], action) {
+            switch (action.type) {
+                case mutations.SET_STATE:
+                    return action.state.groups;
+            }
             return groups;
         },
-        users(users = defaultState.users) {
+        users(users = []) {
             return users;
         }
     }),

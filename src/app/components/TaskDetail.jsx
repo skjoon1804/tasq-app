@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as mutations from '../store/mutations';
 
 const TaskDetail = ({
