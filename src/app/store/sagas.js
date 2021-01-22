@@ -48,6 +48,7 @@ export function* taskDeleteSaga() {
                 }
             });
             history.push('/dashboard');
+            
         } catch (e) {
             console.log("Cannot delete task");
         }
@@ -92,7 +93,5 @@ export function* userAuthenticationSaga() {
             console.log("Cannot Authenticate");
             yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
         }
-
-        
     }
 }

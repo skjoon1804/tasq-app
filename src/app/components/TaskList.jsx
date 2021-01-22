@@ -15,7 +15,7 @@ export const TaskList = ({tasks, name, id, createNewTask}) => (
                 <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none'}} >
                     <div key={task.id} className="card p-2 mt-2">{task.name}</div>
                 </Link>
-                }
+                } 
             </>
         )}
         <button onClick={() => createNewTask(id)} className="btn btn-primary btn-block mt-2">Add New</button>
@@ -26,10 +26,11 @@ export const TaskList = ({tasks, name, id, createNewTask}) => (
 
 const mapStateToProps = (state, ownProps) => {
     let groupId = ownProps.id;
+    let tasks = state.tasks.filter(task => task.group === groupId);
     return {
         name: ownProps.name,
         id: groupId,
-        tasks: state.tasks.filter(task => task.group === groupId)
+        tasks
     }
 }
 

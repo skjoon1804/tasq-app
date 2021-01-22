@@ -60,10 +60,11 @@ export const setState = (state = {}) => ({
     state
 })
 
-export const deleteTask = (taskID) => ({
-    type: DELETE_TASK,
-    taskID
-})
+export const deleteTask = (taskID) => {
+    return {
+        type: DELETE_TASK,
+        taskID
+}}
 
 export const requestAddComment = (ownerID, taskID, content) => ({
     type: REQUEST_ADD_COMMENT,

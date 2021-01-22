@@ -7,15 +7,9 @@ import { deleteTask} from "../store/mutations";
 import {ConnectedComment} from "./Comment";
 
 const TaskDetail = ({
-    id,
-    groups,
-    task,
-    isComplete,
+    id, groups, task, isComplete,
 
-    setTaskCompletion,
-    setTaskName,
-    setTaskGroup,
-    deleteTask
+    setTaskCompletion, setTaskName, setTaskGroup, deleteTask
 }) => {
 
     return (
@@ -47,8 +41,10 @@ const mapStateToProps = (state, ownProps) => {
     let task = state.tasks.find(task => task.id === id);
     let groups = state.groups;
 
-    return {
-        id, task, groups, isComplete: task.isComplete
+    if (task) {
+        return {
+            id, task, groups, isComplete: task.isComplete
+        }
     }
 }
 
@@ -65,7 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(mutations.setTaskName(id, e.target.value));
         },
         deleteTask(id) {
-            dispatch(deleteTask(id));
+            dispatch(mutations.deleteTask(id));
         }
     }
 }
