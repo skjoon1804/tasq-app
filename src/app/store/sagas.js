@@ -38,6 +38,22 @@ export function* taskModificationSaga() {
     }
 }
 
+export function* taskDeleteSaga() {
+    while (true) {
+        const task = yield take(mutations.DELETE_TASK);
+        try {
+            axios.delete(url + `/task`, {
+                data: {
+                    taskId: task.taskID
+                }
+            });
+            history.push('/dashboard');
+        } catch (e) {
+            console.log("Cannot delete task");
+        }
+    }
+}
+
 export function* userAuthenticationSaga() {
     while (true) {
         const {username, password} = yield take(mutations.REQUEST_AUTHENTICATE_USER);
@@ -48,8 +64,7 @@ export function* userAuthenticationSaga() {
             }
             console.log("Authenticated", data);
 
-            yield put(mutations.setState({...data.state}));
-            // yield put(mutations.setState({...data.state, session:{id: data.state.id}}));
+            yield put(mutations.setState({...data.state})); 
             yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));
             history.push('/dashboard');
 
