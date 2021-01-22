@@ -50,8 +50,13 @@ export const updateTask = async task => {
 export const deleteTask = async task => {
     let db = await connectDB();
     let collection = db.collection(`tasks`);
-
     await collection.deleteOne({"id": task});
+}
+
+export const addNewComment = async comment => {
+    let db = await connectDB();
+    let collection = db.collection(`comments`);
+    // await collection.insertOne(comment);
 }
 
 app.post('/task/new', async (req, res) => {
@@ -72,3 +77,7 @@ app.delete('/task/', async (req, res) => {
     res.status(200).send();
 })
 
+app.post('/task/comment', async (req, res) => {
+    console.log("*REQ*", req);
+
+})

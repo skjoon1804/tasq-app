@@ -4,21 +4,19 @@ import {Link} from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import * as mutations from '../store/mutations';
 import { deleteTask} from "../store/mutations";
+import {ConnectedComment} from "./Comment";
 
 const TaskDetail = ({
-    comments,
+    id,
     groups,
-    tasks,
-    match,
+    task,
+    isComplete,
 
     setTaskCompletion,
     setTaskName,
     setTaskGroup,
     deleteTask
 }) => {
-    const id = match.params.id;
-    const task = tasks.find(task => task.id === id);
-    const isComplete = tasks.isComplete;
 
     return (
         <div className="container card p-3 col-6">
@@ -39,14 +37,18 @@ const TaskDetail = ({
                 <Link to="/dashboard"><button className="btn btn-primary m-4">Done</button></Link>
                 <button onClick={() => deleteTask(id)}className="btn btn-danger m-4">Delete</button>
             </div>
+            <ConnectedComment taskId={task.id}/>
         </div>
     )
 };
 
 const mapStateToProps = (state, ownProps) => {
+    let id = ownProps.match.params.id;
+    let task = state.tasks.find(task => task.id === id);
+    let groups = state.groups;
+
     return {
-        tasks: state.tasks,
-        groups: state.groups
+        id, task, groups, isComplete: task.isComplete
     }
 }
 

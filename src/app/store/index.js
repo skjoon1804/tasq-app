@@ -54,8 +54,22 @@ export const store = createStore(
                     return tasks;
             }
         },
-        comments(comments = []) {
-            return comments;
+        comments(comments = [], action) {
+            switch (action.type) {
+                case mutations.SET_STATE:
+                    return action.state.comments;
+                // case mutations.ADD_COMMENT:
+                //     return [
+                //         ...comments, {
+                //             owner: action.ownerID,
+                //             id: action.commentID,
+                //             task: action.taskID,
+                //             content: action.content
+                //         }
+                //     ];
+                default:
+                    return comments;
+            }
         },
         groups(groups = [], action) {
             switch (action.type) {

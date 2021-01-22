@@ -10,6 +10,8 @@ export const AUTHENTICATED = `AUTHENTICATED`;
 export const NOT_AUTHENTICATED = `NOT_AUTHENTICATED`;
 export const SET_STATE = `SET_STATE`;
 export const DELETE_TASK = `DELETE_TASK`;
+export const REQUEST_ADD_COMMENT = `REQUEST_ADD_COMMENT`;
+export const ADD_COMMENT = `ADD_COMMENT`;
 
 export const requestTaskCreation = (groupID) => ({
     type: REQUEST_TASK_CREATION,
@@ -62,3 +64,18 @@ export const deleteTask = (taskID) => ({
     type: DELETE_TASK,
     taskID
 })
+
+// export const requestAddComment = (ownerID, taskID, content) => ({
+//     type: REQUEST_ADD_COMMENT,
+//     ownerID,
+//     taskID,
+//     content,
+// })
+
+// export const addComment = (ownerID, taskID, commentID, content) => ({
+//     type: ADD_COMMENT,
+//     ownerID,
+//     taskID,
+//     commentID,
+//     content
+// })
