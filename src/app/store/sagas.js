@@ -42,13 +42,21 @@ export function* taskDeleteSaga() {
     while (true) {
         const task = yield take(mutations.DELETE_TASK);
         try {
-            axios.delete(url + `/task`, {
+            // task delete
+            // axios.delete(url + `/task`, {
+            //     data: {
+            //         taskId: task.taskID
+            //     }
+            // });
+
+            // delete all comments under specified task
+            axios.delete(url + `/task/comment`, {
                 data: {
                     taskId: task.taskID
                 }
-            });
+            })
+
             history.push('/dashboard');
-            
         } catch (e) {
             console.log("Cannot delete task");
         }

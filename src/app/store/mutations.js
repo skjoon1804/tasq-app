@@ -12,6 +12,8 @@ export const SET_STATE = `SET_STATE`;
 export const DELETE_TASK = `DELETE_TASK`;
 export const REQUEST_ADD_COMMENT = `REQUEST_ADD_COMMENT`;
 export const ADD_COMMENT = `ADD_COMMENT`;
+export const DELETE_COMMENT = `DELETE_COMMENT`;
+
 
 export const requestTaskCreation = (groupID) => ({
     type: REQUEST_TASK_CREATION,
@@ -80,3 +82,10 @@ export const addComment = (ownerID, taskID, commentID, content) => ({
     commentID,
     content
 })
+
+export const deleteComment = (taskID) => {
+    return {
+        type: DELETE_COMMENT,
+        taskID
+    }
+}

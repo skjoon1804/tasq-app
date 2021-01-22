@@ -53,6 +53,12 @@ export const deleteTask = async task => {
     await collection.deleteOne({"id": task});
 }
 
+export const deleteComment = async task => {
+    let db = await connectDB();
+    let collection = db.collection(`comments`);
+    await collection.deleteMany({"task": task});
+}
+
 export const addNewComment = async comment => {
     let db = await connectDB();
     let collection = db.collection(`comments`);
@@ -71,7 +77,7 @@ app.post('/task/update', async (req, res) => {
     res.status(200).send();
 })
 
-app.delete('/task/', async (req, res) => {
+app.delete('/task', async (req, res) => {
     let task = req.body.taskId;
     await deleteTask(task);
     res.status(200).send();
@@ -80,5 +86,11 @@ app.delete('/task/', async (req, res) => {
 app.post('/task/comment', async (req, res) => {
     let comment = req.body.comment;
     await addNewComment(comment);
+    res.status(200).send();
+})
+
+app.delete('/task/comment', async (req, res) => {
+    let task = req.body.taskId;
+    await deleteComment(task);
     res.status(200).send();
 })
