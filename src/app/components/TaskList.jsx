@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestTaskCreation } from '../store/mutations'
 import {withRouter, Link} from 'react-router-dom';
 
-export const TaskList = ({tasks, name, groupId, createNewTask}) => (
+export const TaskList = ({tasks, name, groupId, ownerID, createNewTask}) => (
     <div className="col card p-2 m-2">
         <h3>{name}</h3>
         {tasks.map(task => 
@@ -18,7 +18,7 @@ export const TaskList = ({tasks, name, groupId, createNewTask}) => (
                 } 
             </>
         )}
-        <button onClick={() => createNewTask(groupId)} className="btn btn-primary btn-block mt-2">Add New</button>
+        <button onClick={() => createNewTask(ownerID)} className="btn btn-primary btn-block mt-2">Add New</button>
     </div>
 )
 
@@ -27,17 +27,22 @@ export const TaskList = ({tasks, name, groupId, createNewTask}) => (
 const mapStateToProps = (state, ownProps) => {
     let groupId = ownProps.id;
     let tasks = state.tasks.filter(task => task.group === groupId);
+    let ownerID = state.session.id;
     return {
         name: ownProps.name,
         groupId,
-        tasks
+        tasks,
+        ownerID
     }
 }
 
-const mapDispatchToProps = (dispatch, {id}) => ({
-    createNewTask() {
-        dispatch(requestTaskCreation(id));
+const mapDispatchToProps = (dispatch, {id}) => {{
+    const groupID = id;
+    return {
+        createNewTask(ownerID) {
+            dispatch(requestTaskCreation(ownerID, groupID));
+        }
     }
-});
+}};
 
 export const ConnectedTaskList = withRouter(connect(mapStateToProps, mapDispatchToProps)(TaskList));

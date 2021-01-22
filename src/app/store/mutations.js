@@ -15,8 +15,9 @@ export const ADD_COMMENT = `ADD_COMMENT`;
 export const DELETE_COMMENT = `DELETE_COMMENT`;
 
 
-export const requestTaskCreation = (groupID) => ({
+export const requestTaskCreation = (ownerID, groupID) => ({
     type: REQUEST_TASK_CREATION,
+    ownerID,
     groupID
 })
 

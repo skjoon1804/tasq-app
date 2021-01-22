@@ -8,8 +8,7 @@ const url = process.env.NODE_ENV == `production` ? `` : "http://localhost:7777";
 
 export function* taskCreationSaga() {
     while (true) {
-        const {groupID} = yield take(mutations.REQUEST_TASK_CREATION);
-        const ownerID = `U1`;
+        const {ownerID, groupID} = yield take(mutations.REQUEST_TASK_CREATION);
         const taskID = uuid();
         yield put(mutations.createTask(taskID, groupID, ownerID));
         const {res} = yield axios.post(url + `/task/new`, {
@@ -43,11 +42,11 @@ export function* taskDeleteSaga() {
         const task = yield take(mutations.DELETE_TASK);
         try {
             // task delete
-            // axios.delete(url + `/task`, {
-            //     data: {
-            //         taskId: task.taskID
-            //     }
-            // });
+            axios.delete(url + `/task`, {
+                data: {
+                    taskId: task.taskID
+                }
+            });
 
             // delete all comments under specified task
             axios.delete(url + `/task/comment`, {
