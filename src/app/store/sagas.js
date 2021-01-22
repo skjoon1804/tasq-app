@@ -54,25 +54,25 @@ export function* taskDeleteSaga() {
     }
 }
 
-// export function* commentCreationSaga() {
-//     while (true) {
-//         const {ownerID, taskID, content} = yield take(mutations.REQUEST_ADD_COMMENT);
-//         const commentID = uuid();
-//         yield put(mutations.addComment(ownerID, taskID, commentID, content));
-//         try {
-//             axios.post(url + `/comment`, {
-//                 comment: {
-//                     owner: ownerID,
-//                     id: commentID,
-//                     task: taskID,
-//                     content: content
-//                 }
-//             });
-//         } catch (e) {
-//             console.log("Cannot Add Comment");
-//         }
-//     }
-// }
+export function* commentCreationSaga() {
+    while (true) {
+        const {ownerID, taskID, content} = yield take(mutations.REQUEST_ADD_COMMENT);
+        const commentID = uuid();
+        yield put(mutations.addComment(ownerID, taskID, commentID, content));
+        try {
+            axios.post(url + `/task/comment`, {
+                comment: {
+                    owner: ownerID,
+                    id: commentID,
+                    task: taskID,
+                    content: content
+                }
+            });
+        } catch (e) {
+            console.log("Cannot Add Comment");
+        }
+    }
+}
 
 export function* userAuthenticationSaga() {
     while (true) {

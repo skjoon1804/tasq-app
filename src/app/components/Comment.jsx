@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {connect} from 'react-redux';
 import {ConnectedCommentDetail} from './CommentDetail';
+import * as mutations from '../store/mutations';
 
-const Comment = ({users, comments}) => (
+const Comment = ({owner, comments, addComment}) => {
+    const commentRef = useRef();
+
+    function submitComment(e) {
+        e.preventDefault();
+        addComment(owner, commentRef.current.value);
+        commentRef.current.value = "";
+    }
+
+    return (
     <div className="card">
         <div className="card-body text-left m-1">
             <h5 className="card-title">Comments</h5>
@@ -11,48 +21,33 @@ const Comment = ({users, comments}) => (
                     <ConnectedCommentDetail key={comment.id} {...comment}/>
                 ))}
             </div>
-            <div className="input-group">
-                <input type="text" className="form-control"></input>
-                <button className="btn btn-light">Add</button>
-            </div>
-
+            <form onSubmit={submitComment}>
+                <div className="input-group">
+                    <input type="text" className="form-control" ref={commentRef}></input>
+                    <button type="submit" className="btn btn-light">Add</button>
+                </div>
+            </form>
         </div>
     </div>
-)
+    )
+}
 
 const mapStateToProps = (state, ownProps) => {
     let taskId = ownProps.taskId;
+    let owner = state.session.id;
     return {
-        users: state.users,
+        owner,
         comments: state.comments.filter(comment => comment.task === taskId)
     }
 }
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     // ownerID,
-//     // taskID,
-//     // content,
+const mapDispatchToProps = (dispatch, ownProps) => {
+    let taskID = ownProps.taskId;
+    return {
+        addComment(ownerID, content) {
+            dispatch(mutations.requestAddComment(ownerID, taskID, content));
+        }
+    }
+};
 
-
-//     return {
-//         addComment() {
-//             // dispatch(requestAddComment());
-//         }
-//     }
-// };
-
-export const ConnectedComment = connect(mapStateToProps)(Comment);
-
-
-
-/*
-Properties
-    * Who created it
-    * Its contents
-    * Which task it applies to
-
-Required
-    * Comment creation saga
-    * Comment reducer
-    * comment creation route
-*/
+export const ConnectedComment = connect(mapStateToProps, mapDispatchToProps)(Comment);

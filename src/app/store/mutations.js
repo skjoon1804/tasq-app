@@ -65,17 +65,17 @@ export const deleteTask = (taskID) => ({
     taskID
 })
 
-// export const requestAddComment = (ownerID, taskID, content) => ({
-//     type: REQUEST_ADD_COMMENT,
-//     ownerID,
-//     taskID,
-//     content,
-// })
+export const requestAddComment = (ownerID, taskID, content) => ({
+    type: REQUEST_ADD_COMMENT,
+    ownerID,
+    taskID,
+    content,
+})
 
-// export const addComment = (ownerID, taskID, commentID, content) => ({
-//     type: ADD_COMMENT,
-//     ownerID,
-//     taskID,
-//     commentID,
-//     content
-// })
+export const addComment = (ownerID, taskID, commentID, content) => ({
+    type: ADD_COMMENT,
+    ownerID,
+    taskID,
+    commentID,
+    content
+})
