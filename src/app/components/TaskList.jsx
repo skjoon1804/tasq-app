@@ -13,7 +13,7 @@ export const TaskList = ({tasks, name, id, createNewTask}) => (
                     <div className="card p-2 mt-2">{task.name}</div>
                 </Link>:  
                 <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none'}} >
-                    <div className="card p-2 mt-2">{task.name}</div>
+                    <div key={task.id} className="card p-2 mt-2">{task.name}</div>
                 </Link>
                 }
             </>

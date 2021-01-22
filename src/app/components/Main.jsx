@@ -10,7 +10,7 @@ import { store } from '../store';
 import { history } from '../store/history';
 import { Redirect } from 'react-router';
 
-const RouteGuard = Component =>({match})=>
+const RouteGuard = Component => ({match}) =>
     !store.getState().session.authenticated ?
         <Redirect to="/"/> :
         <Component match={match}/>;

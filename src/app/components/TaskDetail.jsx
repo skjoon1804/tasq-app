@@ -30,7 +30,8 @@ const TaskDetail = ({
             </select>
         </div>
         <div>
-            <Link to="/dashboard"><button className="btn btn-primary mt-2">Done</button></Link>
+            <Link to="/dashboard"><button className="btn btn-primary m-4">Done</button></Link>
+            <Link to="/dashboard"><button className="btn btn-danger m-4">Delete</button></Link>
         </div>
     </div>
 );

@@ -48,7 +48,8 @@ export function* userAuthenticationSaga() {
             }
             console.log("Authenticated", data);
 
-            yield put(mutations.setState({...data.state, session:{id:data.userID}}));
+            yield put(mutations.setState({...data.state}));
+            // yield put(mutations.setState({...data.state, session:{id: data.state.id}}));
             yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));
             history.push('/dashboard');
 

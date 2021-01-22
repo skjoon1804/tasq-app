@@ -59,7 +59,11 @@ export const store = createStore(
             }
             return groups;
         },
-        users(users = []) {
+        users(users = [], action) {
+            switch (action.type) {
+                case mutations.SET_STATE:
+                    return action.state.users;
+            }
             return users;
         }
     }),
