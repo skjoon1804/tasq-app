@@ -26,7 +26,6 @@
   "homepage": "https://github.com/skjoon1804/react-express-app#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@babel/register": "^7.12.10",
@@ -41,6 +40,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.12.10",
+    "@babel/node": "^7.12.10",
     "axios": "^0.21.1",
     "history": "^5.0.0",
     "md5": "^2.3.0",
