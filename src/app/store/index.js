@@ -75,6 +75,14 @@ export const store = createStore(
             switch (action.type) {
                 case mutations.SET_STATE:
                     return action.state.groups;
+                case mutations.ADD_GROUP:
+                    return [
+                        ...groups, {
+                            id: action.id,
+                            name: action.name,
+                            onwer: action.owner
+                        }
+                    ]
             }
             return groups;
         },
@@ -83,7 +91,6 @@ export const store = createStore(
                 case mutations.SET_STATE:
                     return action.state.users;
                 case mutations.ADD_USER:
-                    console.log(action);
                     return [
                         ...users, {
                             name: action.username,

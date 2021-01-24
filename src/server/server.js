@@ -72,6 +72,12 @@ export const addNewUser = async user => {
     await collection.insertOne(user);
 }
 
+export const addNewGroup = async group => {
+    let db = await connectDB();
+    let collection = db.collection(`groups`);
+    await collection.insertOne(group);
+}
+
 // -----------------------
 
 app.post('/task/new', async (req, res) => {
@@ -106,7 +112,6 @@ app.delete('/task/comment', async (req, res) => {
 
 app.post('/user/new', async (req, res) => {
     let user = req.body.user;
-    
     let db = await connectDB();
     let collection = db.collection(`users`);
     let check = await collection.findOne({name: user.name});
@@ -116,4 +121,10 @@ app.post('/user/new', async (req, res) => {
         await addNewUser(user);
         res.status(200).send();
     }
+})
+
+app.post('/group', async (req, res) => {
+    let group = req.body.group;
+    await addNewGroup(group);
+    res.status(200).send();
 })

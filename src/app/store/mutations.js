@@ -15,6 +15,8 @@ export const ADD_COMMENT = `ADD_COMMENT`;
 export const DELETE_COMMENT = `DELETE_COMMENT`;
 export const REQUEST_ADD_USER = `REQUEST_ADD_USER`;
 export const ADD_USER = `ADD_USER`;
+export const REQUEST_ADD_GROUP = `REQUEST_ADD_GROUP`;
+export const ADD_GROUP = `ADD_GROUP`;
 
 
 export const requestTaskCreation = (ownerID, groupID) => ({
@@ -106,6 +108,23 @@ export const addUser = (username, passwordHash, id) => {
         type: ADD_USER,
         username,
         passwordHash,
+        id
+    }
+}
+
+export const requestAddGroup = () => {
+    return {
+        type: REQUEST_ADD_GROUP,
+        name,
+        owner
+    }
+}
+
+export const addGroup = (name, owner, id) => {
+    return {
+        type: ADD_GROUP,
+        name,
+        owner,
         id
     }
 }

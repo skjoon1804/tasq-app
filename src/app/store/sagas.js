@@ -68,6 +68,7 @@ export function* userCreationSaga() {
         const passwordHash = md5(password);
         yield put(mutations.addUser(username, passwordHash, id));
         try {
+            // add user
             yield axios.post(url + `/user/new`, {
                 user: {
                     name: username,
@@ -76,6 +77,22 @@ export function* userCreationSaga() {
                     friends: []
                 }
             });
+            // add groups to new user
+            yield axios.post(url + `/group`, {
+                group: {
+                    name: "To Do", id: "G1", owner: id
+                }
+            })
+            yield axios.post(url + `/group`, {
+                group: {
+                    name: "Doing", id: "G2", owner: id
+                }
+            })
+            yield axios.post(url + `/group`, {
+                group: {
+                    name: "Done", id: "G3", owner: id
+                }
+            })
 
             alert("User successfully created!")
             history.push('/');
