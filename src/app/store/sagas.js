@@ -130,7 +130,7 @@ export function* userAuthenticationSaga() {
             if (!data) {
                 throw new Error();
             }
-            console.log("Authenticated", data);
+            // console.log("Authenticated", data);
 
             yield put(mutations.setState({...data.state})); 
             yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));

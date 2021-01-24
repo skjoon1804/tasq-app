@@ -15,13 +15,13 @@ const RouteGuard = Component => ({match}) =>
         <Redirect to="/"/> :
         <Component match={match}/>;
 
-export const Main = ()=>(
+export const Main =() => (
     <Router history={history}>
         <Provider store={store}>
             <div className="container mt-3 text-center">
                 <ConnectedNavigation/>
-                <Route exact path="/" component={ConnectedLogin} />
-                <Route exact path="/signup" component={ConnectedSignup} />
+                <Route exact path="/" component={props => <ConnectedLogin {...props} />} />
+                <Route exact path="/signup" component={props => <ConnectedSignup {...props} />} />
                 <Route exact path="/dashboard" render={RouteGuard(ConnectedDashboard)}/>
                 <Route exact path="/task/:id" render={RouteGuard(ConnectedTaskDetail)} />
             </div>
