@@ -96,7 +96,9 @@ export const store = createStore(
             return users;
         }
     }),
-    applyMiddleware(createLogger(), sagaMiddleware)
+
+    // For Debugging purpose
+    //applyMiddleware(createLogger(), sagaMiddleware)
 );
 
 for (let saga in sagas) {
