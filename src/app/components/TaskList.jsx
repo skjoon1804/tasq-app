@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestTaskCreation } from '../store/mutations'
 import {withRouter, Link} from 'react-router-dom';
 
-export const TaskList = ({tasks, name, groupId, ownerID, createNewTask}) => (
+export const TaskList = ({tasks, name, ownerID, createNewTask}) => (
     <div className="col card p-2 m-2">
         <h3>{name}</h3>
         {tasks.map(task => 
@@ -30,7 +30,6 @@ const mapStateToProps = (state, ownProps) => {
     let ownerID = state.session.id;
     return {
         name: ownProps.name,
-        groupId,
         tasks,
         ownerID
     }

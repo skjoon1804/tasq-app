@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import * as mutations from '../store/mutations';
 
 const LoginComponent = ({authenticateUser, authenticated}) => {
@@ -12,7 +12,7 @@ const LoginComponent = ({authenticateUser, authenticated}) => {
                 {authenticated === mutations.NOT_AUTHENTICATED ? <p className="text-danger">Login Incorrect</p> : null}
                 <button type="submit" disabled={authenticated==mutations.AUTHENTICATING} className="form-control mt-2 btn btn-primary">Login</button>
             </form>
-            <p>New User? <a href="#">Sign up</a></p> 
+            <p>New User? <Link to='/signup'>Sign up</Link></p> 
         </div>
     );
 };

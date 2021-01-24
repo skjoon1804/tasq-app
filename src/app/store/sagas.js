@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import axios from 'axios';
 import * as mutations from './mutations';
 import {history} from './history';
+import md5 from 'md5';
 
 const url = process.env.NODE_ENV == `production` ? `` : "http://localhost:7777";
 
@@ -47,17 +48,39 @@ export function* taskDeleteSaga() {
                     taskId: task.taskID
                 }
             });
-
             // delete all comments under specified task
             axios.delete(url + `/task/comment`, {
                 data: {
                     taskId: task.taskID
                 }
             })
-
             history.push('/dashboard');
         } catch (e) {
             console.log("Cannot delete task");
+        }
+    }
+}
+
+export function* userCreationSaga() {
+    while (true) {
+        const {username, password} = yield take(mutations.REQUEST_ADD_USER);
+        const id = uuid();
+        const passwordHash = md5(password);
+        yield put(mutations.addUser(username, passwordHash, id));
+        try {
+            yield axios.post(url + `/user/new`, {
+                user: {
+                    name: username,
+                    id,
+                    passwordHash: passwordHash,
+                    friends: []
+                }
+            });
+
+            alert("User successfully created!")
+            history.push('/');
+        } catch (e) {
+            alert("User already exists")
         }
     }
 }
@@ -68,7 +91,7 @@ export function* commentCreationSaga() {
         const commentID = uuid();
         yield put(mutations.addComment(ownerID, taskID, commentID, content));
         try {
-            axios.post(url + `/task/comment`, {
+            yield axios.post(url + `/task/comment`, {
                 comment: {
                     owner: ownerID,
                     id: commentID,

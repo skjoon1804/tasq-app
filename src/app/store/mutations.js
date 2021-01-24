@@ -13,6 +13,8 @@ export const DELETE_TASK = `DELETE_TASK`;
 export const REQUEST_ADD_COMMENT = `REQUEST_ADD_COMMENT`;
 export const ADD_COMMENT = `ADD_COMMENT`;
 export const DELETE_COMMENT = `DELETE_COMMENT`;
+export const REQUEST_ADD_USER = `REQUEST_ADD_USER`;
+export const ADD_USER = `ADD_USER`;
 
 
 export const requestTaskCreation = (ownerID, groupID) => ({
@@ -88,5 +90,22 @@ export const deleteComment = (taskID) => {
     return {
         type: DELETE_COMMENT,
         taskID
+    }
+}
+
+export const requestAddUser = (username, password) => {
+    return {
+        type: REQUEST_ADD_USER,
+        username,
+        password,
+    }
+}
+
+export const addUser = (username, passwordHash, id) => {
+    return {
+        type: ADD_USER,
+        username,
+        passwordHash,
+        id
     }
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
+    "start": "npm run server",  // webpack
     "dev": "webpack-dev-server --open",
     "test-connect": "babel-node src/server/connect-db",
     "initialize": "babel-node src/server/initialize-db",

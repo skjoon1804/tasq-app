@@ -37,6 +37,8 @@ const TaskDetail = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(ownProps);
+    
     let id = ownProps.match.params.id;
     let task = state.tasks.find(task => task.id === id);
     let groups = state.groups;

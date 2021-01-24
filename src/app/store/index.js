@@ -82,6 +82,16 @@ export const store = createStore(
             switch (action.type) {
                 case mutations.SET_STATE:
                     return action.state.users;
+                case mutations.ADD_USER:
+                    console.log(action);
+                    return [
+                        ...users, {
+                            name: action.username,
+                            passwordHash: action.passwordHash,
+                            id: action.id,
+                            friends: []
+                        }
+                    ]
             }
             return users;
         }

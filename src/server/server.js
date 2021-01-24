@@ -6,6 +6,7 @@ import './initialize-db';
 import {authenticationRoute} from './authenticate';
 import path from 'path';
 
+
 let port = process.env.PORT || 7777;
 let app = express();
 
@@ -65,6 +66,14 @@ export const addNewComment = async comment => {
     await collection.insertOne(comment);
 }
 
+export const addNewUser = async user => {
+    let db = await connectDB();
+    let collection = db.collection(`users`);
+    await collection.insertOne(user);
+}
+
+// -----------------------
+
 app.post('/task/new', async (req, res) => {
     let task = req.body.task;
     await addNewTask(task);
@@ -93,4 +102,18 @@ app.delete('/task/comment', async (req, res) => {
     let task = req.body.taskId;
     await deleteComment(task);
     res.status(200).send();
+})
+
+app.post('/user/new', async (req, res) => {
+    let user = req.body.user;
+    
+    let db = await connectDB();
+    let collection = db.collection(`users`);
+    let check = await collection.findOne({name: user.name});
+    if (check) {
+        res.status(500).send("User already exists!");
+    } else {
+        await addNewUser(user);
+        res.status(200).send();
+    }
 })

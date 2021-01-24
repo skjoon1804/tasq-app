@@ -8,8 +8,10 @@ const Comment = ({owner, comments, addComment}) => {
 
     function submitComment(e) {
         e.preventDefault();
-        addComment(owner, commentRef.current.value);
-        commentRef.current.value = "";
+        if (commentRef.current.value.trim() !== '') {
+            addComment(owner, commentRef.current.value);
+            commentRef.current.value = "";
+        }
     }
 
     return (
