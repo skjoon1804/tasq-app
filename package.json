@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run server",
     "dev": "webpack-dev-server --open",
-    "server": "cross-env NODE_ENV=production babel-node src/server",
-    "server-dev": "nodemon src/server --exec babel-node src/server",
-    "start-dev": "concurrently \"npm run server-dev\" \"npm run dev\"",
-    "server-spec": "babel-node src/server/server.spec",
-    "start": "npm run server"
+    "test-connect": "babel-node src/server/connect-db",
+    "initialize": "babel-node src/server/initialize-db",
+    "server": "babel-node src/server/server",
+    "start-dev": "concurrently \"npm run server\" \"npm run dev\""
   },
   "repository": {
     "type": "git",
@@ -42,11 +42,8 @@
   "dependencies": {
     "@babel/cli": "^7.12.10",
     "axios": "^0.21.1",
-    "babel-cli": "^6.26.0",
-    "cross-env": "^7.0.3",
     "history": "^5.0.0",
     "md5": "^2.3.0",
-    "nodemon": "^2.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
