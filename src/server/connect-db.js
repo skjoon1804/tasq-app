@@ -1,6 +1,10 @@
 import { MongoClient } from 'mongodb';
 
-const url = process.env.MONGODB_URI || `mongodb://localhost:27017/myorganizer`;
+let url = '';
+if (process.env.NODE_ENV === `production`)  //process.env.MONGODB_URI
+    url = `mongodb+srv://admin:admin@cluster0.mylms.mongodb.net/db?retryWrites=true&w=majority`;
+else 
+    url = `mongodb://localhost:27017/myorganizer`
 let db = null;
 
 export async function connectDB() {
