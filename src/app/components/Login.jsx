@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import * as mutations from '../store/mutations';
+import '../../styles/index.css';
 
 const LoginComponent = ({authenticateUser, authenticated}) => {
     return (
-        <div className="container card p-3 col-md-4">
+        <div className="login container card p-5 col-md-4">
             <form onSubmit={authenticateUser}>
                 <input type="text" placeholder="username" name="username" defaultValue="" className="form-control"/>
                 <input type="password" placeholder="password" name="password" defaultValue="" className="form-control mt-2"/>
