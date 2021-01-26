@@ -8,15 +8,11 @@ export const TaskList = ({tasks, name, ownerID, createNewTask}) => (
         <h3>{name}</h3>
         {tasks.map(function(task, index) {
             return (
-                <div key={index}>
-                    {task.isComplete ?
-                    <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none', textDecoration: 'line-through'}} >
-                        <div className="card p-2 mt-2">{task.name}</div>
-                    </Link>:  
-                    <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none'}} >
-                        <div key={task.id} className="card p-2 mt-2">{task.name}</div>
-                    </Link>
-                    } 
+                <div className="card p-2 mt-2" key={index}>
+                    {task.isComplete 
+                    ? <Link className="" to={`/task/${task.id}`} style={{textDecoration: 'none', textDecoration: 'line-through', display: 'inline'}} >{task.name}</Link>
+                    : <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none'}} >{task.name}</Link>
+                    }
                 </div>
             )
         })}

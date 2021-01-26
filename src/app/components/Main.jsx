@@ -18,8 +18,8 @@ const RouteGuard = Component => ({match}) =>
 export const Main =() => (
     <Router history={history}>
         <Provider store={store}>
-            <div className="container mt-3 text-center">
-                <ConnectedNavigation/>
+            <ConnectedNavigation/>
+            <div className="container text-center">
                 <Route exact path="/" component={props => <ConnectedLogin {...props} />} />
                 <Route exact path="/signup" component={props => <ConnectedSignup {...props} />} />
                 <Route exact path="/dashboard" render={RouteGuard(ConnectedDashboard)}/>
