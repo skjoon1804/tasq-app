@@ -7,7 +7,7 @@ import { deleteTask} from "../store/mutations";
 import {ConnectedComment} from "./Comment";
 
 const TaskDetail = ({
-    id, groups, task, isComplete,
+    currentUser, id, groups, task, isComplete,
 
     setTaskCompletion, setTaskName, setTaskGroup, deleteTask
 }) => {
@@ -29,7 +29,9 @@ const TaskDetail = ({
             </div>
             <div>
                 <Link to="/dashboard"><button className="btn btn-primary m-4">Done</button></Link>
-                <button onClick={() => deleteTask(id)}className="btn btn-danger m-4">Delete</button>
+                {currentUser === task.owner
+                ? <button onClick={() => deleteTask(id)}className="btn btn-danger m-4">Delete</button>
+                : null}
             </div>
             <ConnectedComment taskId={task.id}/>
         </div>
@@ -37,15 +39,14 @@ const TaskDetail = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps);
-    
+    let currentUser = state.session.id;
     let id = ownProps.match.params.id;
     let task = state.tasks.find(task => task.id === id);
     let groups = state.groups;
 
     if (task) {
         return {
-            id, task, groups, isComplete: task.isComplete
+            currentUser, id, task, groups, isComplete: task.isComplete
         }
     }
 }

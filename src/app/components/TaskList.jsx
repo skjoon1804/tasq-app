@@ -10,7 +10,7 @@ export const TaskList = ({tasks, name, ownerID, createNewTask}) => (
             return (
                 <div className="card p-2 mt-2" key={index}>
                     {task.isComplete 
-                    ? <Link className="" to={`/task/${task.id}`} style={{textDecoration: 'none', textDecoration: 'line-through', display: 'inline'}} >{task.name}</Link>
+                    ? <Link className="" to={`/task/${task.id}`} style={{textDecoration: 'none', textDecoration: 'line-through'}} >{task.name}</Link>
                     : <Link key={task.id} to={`/task/${task.id}`} style={{textDecoration: 'none'}} >{task.name}</Link>
                     }
                 </div>
