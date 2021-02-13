@@ -2,8 +2,10 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import React from 'react';
 import * as mutations from '../store/mutations';
+import {history} from '../store/history';
+import { store } from '../store';
 
-const Navigation = ({id, authenticated}) => (
+const Navigation = ({id, authenticated, logout}) => (
     <>
     {!authenticated 
     ?   <>
@@ -30,6 +32,9 @@ const Navigation = ({id, authenticated}) => (
                 <li className="nav-item mx-4" style={{display: 'inline-block'}}>
                     <Link to="mailto:kwonoj@uci.edu" className="nav-link">Contact</Link>
                 </li>
+                <button onClick={logout}>
+                    Logout
+                </button>
             </ul>          
         </nav>
     }
@@ -44,4 +49,12 @@ const mapStateToProps = ({session}) => {
     }
 }
 
-export const ConnectedNavigation = connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = (dispatch) => ({
+    logout(e) {
+        e.preventDefault();
+        dispatch(mutations.processAuthenticateUser(null));
+        history.push('/');
+    }
+})
+
+export const ConnectedNavigation = connect(mapStateToProps, mapDispatchToProps)(Navigation);
