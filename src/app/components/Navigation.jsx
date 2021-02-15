@@ -33,7 +33,7 @@ const Navigation = ({id, authenticated, logout}) => (
                     <Link to="mailto:kwonoj@uci.edu" className="nav-link">Contact</Link>
                 </li>
                 <li className="nav-item mx-4" style={{display: 'inline-block'}}>
-                    <Link to="" onClick={logout}>Logout</Link>
+                    <Link to="" className="nav-link" onClick={logout}>Logout</Link>
                 </li>
             </ul>          
         </nav>
